@@ -1,0 +1,27 @@
+package dto;
+
+public class Recipe_DTO {
+	public int recipe_no;
+	public String recipe_code_type;
+	public String recipe_name;
+	public String recipe_contents;
+	public int recipe_like;
+	public String user_id;
+	public String cook_time;
+	public int comment_no;
+	public String recipe_date;
+	
+	public Recipe_DTO(int recipe_no, String recipe_code_type, String recipe_name, 
+			String recipe_contents, int recipe_like, String user_id, String cook_time,
+			int comment_no, String recipe_data) {
+		this.recipe_no = recipe_no;
+		this.recipe_code_type = recipe_code_type;
+		this.recipe_name = recipe_name;
+		this.recipe_contents = recipe_contents;
+		this.recipe_like = recipe_like;
+		this.user_id = user_id;
+		this.cook_time = cook_time;
+		this.comment_no = comment_no;
+		this.recipe_date = recipe_date;
+	}
+}

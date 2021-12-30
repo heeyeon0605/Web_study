@@ -1,0 +1,21 @@
+package zoo;
+
+public class Cat extends Animal{
+	
+	public Cat(String name, int age) {
+		super(name, age);
+	}
+	
+	@Override
+	void makeSomeNoise() {
+		System.out.println("³Ä¿Ë³Ä¿Ë");
+	}
+	
+	public static void main(String[] args) {
+		int choice = 1;
+		if (choice == 1 || choice == 2 || choice == 3) {
+			System.out.println("yes");
+		}
+	}
+
+}

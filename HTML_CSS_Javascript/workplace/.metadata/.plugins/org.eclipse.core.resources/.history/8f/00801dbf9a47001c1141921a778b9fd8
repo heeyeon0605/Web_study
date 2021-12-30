@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>3_definition</title>
+</head>
+<body>
+	<h3>아리</h3>
+		<dl>
+			<dt>스킬</dt>
+			<dd>Q : 현혹의 구슬</dd>
+			<dd>W : 여우불</dd>
+			<dd>E : 매혹</dd>
+			<dd>R : 혼령 질주</dd>
+		</dl>
+</body>
+</html>

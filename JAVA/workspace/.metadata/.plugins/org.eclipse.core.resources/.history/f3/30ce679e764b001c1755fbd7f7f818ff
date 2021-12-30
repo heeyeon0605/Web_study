@@ -1,0 +1,46 @@
+package dto;
+
+public class Recipe_DTO {
+	public int recipe_no;
+	public String recipe_code_type;
+	public String recipe_name;
+	public String recipe_contents;
+	public int recipe_like;
+	public String user_id;
+	public String cook_time;
+	public int comment_no;
+	public String recipe_date;
+	
+	public Recipe_DTO(int recipe_no, String recipe_code_type, String recipe_name, 
+			String recipe_contents, int recipe_like, String user_id, String cook_time,
+			int comment_no, String recipe_date) {
+		this.recipe_no = recipe_no;
+		this.recipe_code_type = recipe_code_type;
+		this.recipe_name = recipe_name;
+		this.recipe_contents = recipe_contents;
+		this.recipe_like = recipe_like;
+		this.user_id = user_id;
+		this.cook_time = cook_time;
+		this.comment_no = comment_no;
+		this.recipe_date = recipe_date;
+	}
+	
+	public Recipe_DTO(String[] data) {
+		this.recipe_no = Integer.parseInt(data[0]);
+		this.recipe_code_type = data[1];
+		this.recipe_name = data[2];
+		this.recipe_contents = data[3];
+		this.recipe_like = Integer.parseInt(data[4]);
+		this.user_id = data[5];
+		this.cook_time = data[6];
+		this.comment_no = Integer.parseInt(data[7]);
+		this.recipe_date = data[8];
+	}
+	
+	@Override
+	public String toString() {
+		return recipe_code_type + "\t" + recipe_name + "\t" + recipe_contents + "\t" + 
+				recipe_like + "\t" + user_id + "\t" + cook_time + "\t" + 
+				"\t" + comment_no + "\t" + recipe_date;
+	}
+}

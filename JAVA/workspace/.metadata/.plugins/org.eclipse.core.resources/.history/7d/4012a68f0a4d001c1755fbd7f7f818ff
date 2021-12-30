@@ -1,0 +1,94 @@
+package view;
+
+import java.util.Scanner;
+
+import dao.UserDAO;
+import dto.UserDTO;
+
+public class Recipe_view {
+	public Recipe_view() {
+		Scanner sc = new Scanner(System.in);
+
+		// 새 레시피 저장하는 페이지
+		Recipe_DAO recipe_udao = new Recipe_DAO();
+		System.out.println("새 레시피를 만드는 페이지입니다.");
+
+		// 새 레시피 종류 (code_type)
+		boolean choice_bool = true;
+		while (choice_bool) {
+			System.out.println("새 레시피의 종류\n1. 한식\n2. 중식\n3. 일식\n4. 양식");
+			int choice = sc.nextInt(); // 1:한식, 2:중식, 3:일식, 4:양식 중 택 하나
+			String code_type = "";
+
+			if (choice == 1 || choice == 2 || choice == 3 || choice == 4) { // 맞게 입력한 경우
+
+				switch (choice) { // code_type을 임의로 한식은 00, 중식은 01, 일식은 10, 양식은 11로 설정
+				case 1: // 레시피의 종류가 한식일 경우
+					code_type = "00"; // Recipe_DTO에서 String으로 설정해서 일단 String으로 설정. int로 변경해도 무방.
+					break;
+				case 2: // 레시피의 종류가 중식일 경우
+					code_type = "01";
+					break;
+				case 3: // 레시피의 종류가 일식일 경우
+					code_type = "10";
+					break;
+				case 4: // 레시피의 종류가 양식일 경우
+					code_type = "11";
+					break;
+				}
+				choice_bool = false; // 맞게 입력했으므로 while문 탈출
+
+			} else { // 잘못 입력한 경우
+				System.out.println("잘못 입력하셨습니다. 1, 2, 3, 4 중 다시 입력해주세요.");
+			}
+		}
+
+		// 새 레시피 이름 (recipe_name)
+		System.out.print("새 레시피 이름 : ");
+		String recipe_name = sc.next();
+
+		// 새 레시피의 유저 아이디 (user_id)
+		UserDAO udao = new UserDAO();
+		String user_id = udao.user_id;
+
+		// 새 레시피의 조리 시간 (cook_time)
+		System.out.print("새 레시피의 조리 시간 : ");
+		String cook_time = sc.next();
+
+		// 새 레시피의 내용 (recipe_contents)
+		System.out.print("새 레시피의 내용 : ");
+		String recipe_contents = sc.next();
+
+		// 새 레시피의 좋아요 개수 (recipe_like) --> default로 0 대입
+		int recipe_like = 0;
+
+		// 여기까지 왔다면 회원 가입에 필요한 모든 정보를 입력받았다는 뜻이다.
+		// 그 모든 정보들을 UserTable.txt에 저장해야 하고 저장하는 코드들은
+		// DAO에 구현되어 있다. DAO에 있는 어떤 메소드에 그 데이터들을 넘기기 위해서는
+		// 매개변수로 넘겨야 하고, 많은 데이터를 받기위해 매개변수도 많이 필요해진다.
+		// 그 데이터들을 따로 보내지 않고 하나의 객체(UserDTO)로 포장해서 넘겨주면
+		// 더욱 편리하게 쓸 수 있다.
+		UserDTO newUser = new UserDTO(userid, userpw, username, userage, userphone, useraddr);
+		if (udao.join(newUser)) {
+			System.out.println("회원가입 성공!");
+			System.out.println(username + "님 가입을 환영합니다~");
+		} else {
+			System.out.println("회원가입 실패 / 다시 시도해 주세요.");
+		}
+//		String userpw="";
+//		if(udao.checkId(userid)) {
+//			while(true) {
+//				System.out.print("비밀번호 : ");
+//				userpw = sc.next();
+//				System.out.print("비밀번호 확인 : ");
+//				String userpw_re = sc.next();
+//				//비밀번호 검사는 따로 데이터베이스를 거치지 않기 때문에 뷰단에서 해결 가능
+//				if(userpw.equals(userpw_re)) {
+//					break;
+//				}else {
+//					System.out.println("비밀번호를 다시 확인해주세요.");
+//				}
+//			}
+
+	}
+}

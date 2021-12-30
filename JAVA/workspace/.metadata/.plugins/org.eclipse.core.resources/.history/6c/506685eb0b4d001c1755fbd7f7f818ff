@@ -1,0 +1,87 @@
+package view;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+import dao.UserDAO;
+import dto.UserDTO;
+
+public class Recipe_view {
+	public Recipe_view() {
+		Scanner sc = new Scanner(System.in);
+
+		// 새 레시피 저장하는 페이지
+		Recipe_DAO recipe_dao = new Recipe_DAO();
+		System.out.println("새 레시피를 만드는 페이지입니다.");
+
+		// 새 레시피 번호 (recipe_no)
+		int recipe_no = 0; // 임의로 0으로 지정
+
+		// 새 레시피 종류 (code_type)
+		boolean choice_bool = true;
+		String code_type = "";
+
+		while (choice_bool) { // 새 레시피 종류를 맞게 입력할 때까지 while문 돌리기
+			System.out.println("새 레시피의 종류\n1. 한식\n2. 중식\n3. 일식\n4. 양식");
+			int choice = sc.nextInt(); // 1:한식, 2:중식, 3:일식, 4:양식 중 택 하나
+
+			if (choice == 1 || choice == 2 || choice == 3 || choice == 4) { // 맞게 입력한 경우
+
+				switch (choice) { // code_type을 임의로 한식은 00, 중식은 01, 일식은 10, 양식은 11로 설정
+				case 1: // 레시피의 종류가 한식일 경우
+					code_type = "00"; // Recipe_DTO에서 String으로 설정해서 일단 String으로 설정. int로 변경해도 무방.
+					break;
+				case 2: // 레시피의 종류가 중식일 경우
+					code_type = "01";
+					break;
+				case 3: // 레시피의 종류가 일식일 경우
+					code_type = "10";
+					break;
+				case 4: // 레시피의 종류가 양식일 경우
+					code_type = "11";
+					break;
+				}
+				choice_bool = false; // 맞게 입력했으므로 while문 탈출
+
+			} else { // 잘못 입력한 경우
+				System.out.println("잘못 입력하셨습니다. 1, 2, 3, 4 중 다시 입력해주세요.");
+			}
+		}
+
+		// 새 레시피 이름 (recipe_name)
+		System.out.print("새 레시피 이름 : ");
+		String recipe_name = sc.next();
+
+		// 새 레시피의 유저 아이디 (user_id)
+		UserDAO udao = new UserDAO();
+		String user_id = udao.user_id;
+
+		// 새 레시피의 조리 시간 (cook_time)
+		System.out.print("새 레시피의 조리 시간 : ");
+		String cook_time = sc.next();
+
+		// 새 레시피의 내용 (recipe_contents)
+		System.out.print("새 레시피의 내용 : ");
+		String recipe_contents = sc.next();
+
+		// 새 레시피의 좋아요 개수 (recipe_like) --> default로 0 대입
+		int recipe_like = 0;
+
+		// 새 레시피의 작성 날짜 (recipe_date)
+		// 자동으로 작성자가 새 레시피를 작성하는 현재 오늘 날짜를 가져옴. DateTimeFormatter과 LocalDate import해서 활용
+		LocalDate todaysDate = LocalDate.now(); // 현재 날짜를 가져오는 LocalDate 활용
+		String recipe_date = todaysDate.format(DateTimeFormatter.ofPattern("yyyyMMdd")); // 날짜 형식을 String 타입으로 바꿔줌.
+																							// "2021124" 이런식으로 저장
+
+		// 모두 작성한 새 레시피의 정보를 Recipe_DTO 객체로 저장.
+		Recipe_DTO newRecipe = new Recipe_DTO(recipe_no, code_type, recipe_name, user_id, cook_time, recipe_contents,
+				recipe_like, recipe_date);
+		if (recipe_dao.join(newRecipe)) {
+			System.out.println("새 레시피 작성을 완료하였습니다.");
+		} else {
+			System.out.println("새 레시피 작성을 다시 시도해주세요.");
+		}
+
+	}
+}

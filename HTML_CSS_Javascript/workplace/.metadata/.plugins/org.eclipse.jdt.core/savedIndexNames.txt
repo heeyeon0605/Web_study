@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\WEB_1900_SHY\HTML_CSS_Javascript\workplace\.metadata\.plugins\org.eclipse.jdt.core
+2155133277.index
+504376574.index
+1763122280.index

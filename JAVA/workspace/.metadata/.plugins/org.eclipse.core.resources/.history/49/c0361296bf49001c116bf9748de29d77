@@ -1,0 +1,46 @@
+package view;
+
+import java.util.Scanner;
+
+public class NonMain_view {
+	public NonMain_view() {
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			
+			System.out.println("비회원 메인 화면 입니다.");
+			System.out.println("1.전체 레시피\n" + "2. TOP 10 레시피\n" 
+			+ "3. 레시피 검색\n" + "4. 로그인\n" + "5. 회원가입\n");
+			int choice = sc.nextInt();
+
+			switch (choice) {
+			case 1:
+				// 전체 레시피
+				new Recipe_view();
+				break;
+			case 2:
+				// TOP 10 레시피
+				new Top10_view();
+				break;
+			case 3:
+				// 레시피 검색
+				new Search_Recipe_view();
+				break;
+			case 4:
+				// 로그인
+				new Login_view();
+				break;
+			case 5:
+				// 내가본 레시피
+				new Register_view();
+				break;
+			case 6:
+				// 마이페이지
+				new MyInfo_view();
+				break;
+
+			}
+		
+
+		} // while
+	}
+}

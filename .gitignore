@@ -1,0 +1,7 @@
+*.zip
+*.exe
+
+JAVA/resource
+HTML_CSS_Javascript/resource
+DBMS/resource
+apache/

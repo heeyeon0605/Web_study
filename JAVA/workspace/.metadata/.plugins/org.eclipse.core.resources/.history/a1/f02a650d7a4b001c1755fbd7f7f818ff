@@ -1,0 +1,50 @@
+package view;
+
+import java.util.Scanner;
+
+import dao.ProductDAO;
+import dao.Session;
+import dto.UserDTO;
+
+public class Search_Recipe_view {
+	public Search_Recipe_view() {
+		Scanner sc = new Scanner(System.in);
+		Recipe_DAO recipe_dao = new Recipe_DAO(); // recipe_dao로 불러오기
+		
+		System.out.print("레시피 검색창입니다.");
+		int prodnum = sc.nextInt();
+		System.out.println("1. 레시피 이름으로 검색\n2. 작성자로 레시피 검색\n3. 레시피 번호로 검색\n");
+		int choice = sc.nextInt(); // 1, 2, 3 중 택 하나
+		
+		switch (choice){
+		case 1 : // 레시피 이름을 검색할 경우
+			System.out.println("검색할 레시피의 이름 : ");
+			String recipe_name = sc.nextLine();
+			if(recipe_dao.getList(recipe_name, newData)) {
+				tempData = recipe_dao.getList(recipe_name, newData);
+				printList(tempData); // 특정 레시피 이름을 가진 레시피만 tempData에 담아 출력
+			}else {
+				System.out.println("찾으시는 레시피 이름이 없습니다. 다시 시도해주세요.");
+			}
+		case 2 : // 레시피의 작성자를 검색할 경우
+			System.out.println("검색할 레시피의 작성자 : ");
+			String user_id = sc.nextLine();
+			if(recipe_dao.getList(user_id, newData)) {
+				tempData = getList(user_id, newData);
+				printList(tempData); // 특정 레시피 작성자가 쓴 레시피만 tempData에 담아 출력
+			}else { 
+				System.out.println("찾으시는 레시피 작성자가 없습니다. 다시 시도해주세요.");
+			}
+		case 3 : // 레시피 번호로 검색할 경우
+			System.out.println("검색할 레시피의 번호 : ");
+			int recipe_no = sc.nextInt();
+			if(recipe_dao.getList(recipe_no, newData)) {
+				tempData = getList(recipe_no, newData);
+				printList(tempData); // 특정 레시피 번호 가진 레시피만 tempData에 담아 출력 (하나일 예정)
+			}else {
+				printList(recipe_name, newData);
+			}
+		}
+		// RecipeDAO에 getList를 레시피 번호, 이름, 작성자 총 세 방식으로 찾아올 수 있도록 함수 구현 예정.
+	}
+}
